@@ -1,4 +1,5 @@
-import requests
+#!/usr/bin/env python
+
 import sys
 
 from mechanize import Browser
@@ -9,8 +10,6 @@ first_name, last_name = full_name.split(' ', 1)
 first_initial = first_name[0]
 player_name = " ".join([first_initial, last_name])
 
-session = requests.session()
-response = session.get('http://www.physioroom.com/news/english_premier_league/epl_injury_table.php')
 
 mech = Browser()
 url = 'http://www.physioroom.com/news/english_premier_league/epl_injury_table.php'
