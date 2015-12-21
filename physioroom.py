@@ -10,11 +10,9 @@ first_name, last_name = full_name.split(' ', 1)
 first_initial = first_name[0]
 player_name = " ".join([first_initial, last_name])
 
-
 mech = Browser()
 url = 'http://www.physioroom.com/news/english_premier_league/epl_injury_table.php'
 page = mech.open(url)
-
 html = page.read()
 soup = BeautifulSoup(html)
 
