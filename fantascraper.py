@@ -9,32 +9,25 @@ from mechanize import Browser
 from configparser import ConfigParser
 from BeautifulSoup import BeautifulSoup
 
+# Weird names in EPL from other alphabets
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--version", help="Print version", action="version", version="%(prog)s 0.1.0-alpha")
 parser.add_argument("-c", "--config", help="Specify config file location", default="fantascraper.conf", dest='conf_file')
 parser.add_argument("-t", "--team", help="Specify team file location", default="team.csv", dest='team_file')
-
+parser.add_argument("--version", help="Print version", action="version", version="%(prog)s 0.1.0-alpha")
 args, remaining_argv = parser.parse_known_args()
 
 team_file = args.team_file
 conf_file = args.conf_file
 conf = ConfigParser()
 conf.read([conf_file])
-
-usernm = conf.get('config', 'username')
-passwd = conf.get('config', 'password')
 league_id = conf.get('config', 'league_id')
 team_id = conf.get('config', 'team_id')
-roster_table_outfield = conf.get('config', 'outfield')
-roster_table_keepers = conf.get('config', 'keepers')
 
-session = requests.session()
-login_data = {'username': usernm, 'password': passwd}
-session.post('https://www.fantrax.com/login.go', json=login_data)
-
+roster_table_outfield = 'rosterTable_5010'
+roster_table_keepers = 'rosterTable_5020'
 mech = Browser()
 url = 'http://www.fantrax.com/newui/fantasy/teamRoster.go?teamId={}&leagueId={}&isSubmit=y'.format(team_id,league_id)
 page = mech.open(url)
