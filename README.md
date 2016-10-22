@@ -3,7 +3,7 @@ General scripts for fantasy EPL
 
 fantascraper.py mostly works, needs more testing.
 
-physioroom.py works.
+physioroom.py works, probably needs more testing.
 
 ### Prereqs
 
@@ -47,12 +47,10 @@ To get a token, go to [this page](https://api.slack.com/web) and click `Generate
 usage: fantascraper.py [-h] [--version] [-c CONF_FILE] [-t TEAM_FILE]
 
 optional arguments:
-  -h, --help            show this help message and exit
-  --version             Print version
-  -c CONF_FILE, --config CONF_FILE
-                        Specify config file location
-  -t TEAM_FILE, --team TEAM_FILE
-                        Specify team file location
+  -h, --help                        show this help message and exit
+  --version                         Print version
+  -c CONF_FILE, --config CONF_FILE  Specify config file location
+  -t TEAM_FILE, --team TEAM_FILE    Specify team file location
 ```
 
 ```
