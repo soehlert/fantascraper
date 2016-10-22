@@ -1,0 +1,7 @@
+BeautifulSoup==3.2.1
+configparser==3.5.0
+mechanize==0.2.5
+requests==2.11.1
+six==1.10.0
+slackclient==1.0.2
+websocket-client==0.37.0
