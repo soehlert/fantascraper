@@ -1,65 +1,80 @@
 #!/usr/bin/env python
 
-import ConfigParser
-import requests
+import csv
 import sys
-import urllib
+import argparse
+import requests
 
 from mechanize import Browser
+from configparser import ConfigParser
 from BeautifulSoup import BeautifulSoup
-from selenium import webdriver
 
-conf = ConfigParser.ConfigParser()
-conf.read('fantascraper.conf')
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--version", help="Print version", action="version", version="%(prog)s 0.1.0-alpha")
+parser.add_argument("-c", "--config", help="Specify config file location", default="fantascraper.conf", dest='conf_file')
+parser.add_argument("-t", "--team", help="Specify team file location", default="team.csv", dest='team_file')
+
+args, remaining_argv = parser.parse_known_args()
+
+team_file = args.team_file
+conf_file = args.conf_file
+conf = ConfigParser()
+conf.read([conf_file])
 
 usernm = conf.get('config', 'username')
 passwd = conf.get('config', 'password')
-leagueid = conf.get('config', 'leagueid')
-team_name = str(sys.argv[1])
+league_id = conf.get('config', 'league_id')
+team_id = conf.get('config', 'team_id')
+roster_table_outfield = conf.get('config', 'outfield')
+roster_table_keepers = conf.get('config', 'keepers')
 
 session = requests.session()
-login_data = dict(username=usernm, password=passwd)
-session.post('https://www.fantrax.com/login.go', data=login_data)
+login_data = {'username': usernm, 'password': passwd}
+session.post('https://www.fantrax.com/login.go', json=login_data)
 
 mech = Browser()
-url = 'http://www.fantrax.com/fantasy/standings.go?leagueId={}'.format(leagueid)
+url = 'http://www.fantrax.com/newui/fantasy/teamRoster.go?teamId={}&leagueId={}&isSubmit=y'.format(team_id,league_id)
 page = mech.open(url)
 html = page.read()
 soup = BeautifulSoup(html)
 
-driver = webdriver.Firefox()
-driver.get(url)
+players = []
 
-teamnm = driver.find_element_by_xpath('//*/td[@class="team"]*/')
-spreadsheet = driver.find_element_by_link_text('Download Spreadsheet')
+def rename_player(first, last):
+    player = first[:1], last
+    players.append(player)
+    return players
 
-teamnm.click()
-spreadsheet.click()
+def find_players(soup, roster_table):
+    player_table = soup.find('table', {'id':roster_table})
+    for row in player_table.findAll('tr'):
+        names = row.findAll('a', {'class': 'hand '})
+        for name in names:
+            if name.find('img'):
+                continue
+            else:
+                if ',' not in name.string:
+                    if ' ' not in name.string:
+                        player = name.string,
+                        players.append(player)
+                    else:
+                        first, last = name.string.split(' ')
+                        rename_player(first, last)
+                else:
+                    last, first = name.string.split(', ')
+                    rename_player(first, last)
+    return players
 
+def write_players(players, team_file):
+    with open(team_file, 'wb') as team:
+        f = csv.writer(team,delimiter=' ')
+        for player in players:
+            f.writerow(player)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# kill all script and style elements
-#for script in soup(["script", "style"]):
-#    script.extract()    # rip it out
-
-#table = soup.find("table", {"id":"rosterTable_5010"})
-#rows = table.findChildren(['tr'])
-
-#for row in rows:
-#    players = row.findChildren(['a'])
-#    for player in players[0]:
-#        print player
+if __name__ == '__main__':
+    find_players(soup, roster_table_outfield)
+    find_players(soup, roster_table_keepers)
+    write_players(players, team_file)
