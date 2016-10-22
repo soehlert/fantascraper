@@ -8,23 +8,24 @@ from slackclient import SlackClient
 from configparser import ConfigParser
 from BeautifulSoup import BeautifulSoup
 
+# Weird names in EPL from other alphabets
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
 parser = argparse.ArgumentParser()
-
-parser.add_argument("--version", help="Print version", action="version", version="%(prog)s 0.5.0-beta")
 parser.add_argument("-c", "--config", help="Specify config file location", default="physioroom.conf", dest='conf_file')
-parser.add_argument("-t", "--team", help="Specify team file location", default="team.txt", dest='team_file')
-
+parser.add_argument("-t", "--team", help="Specify team file location", default="team.csv", dest='team_file')
+parser.add_argument("--version", help="Print version", action="version", version="%(prog)s 0.5.0-beta")
 args, remaining_argv = parser.parse_known_args()
 
 team_file = args.team_file
 conf_file = args.conf_file
 conf = ConfigParser()
 conf.read([conf_file])
-
 slack_channel = conf.get('slack', 'channel_id')
 slack_token = conf.get('slack', 'token')
-slack_client = SlackClient(slack_token)
 
+slack_client = SlackClient(slack_token)
 teams = ["Arsenal", "Liverpool", "Manchester City", "West Bromwich Albion", "Tottenham Hotspur", "Middlesbrough", "Burnley", "Swansea City", "Manchester United", "Crystal Palace", "Chelsea", "Bournemouth", "Leicester City", "Everton", "Southampton", "Stoke City", "Watford", "Hull City", "West Ham United", "Sunderland"]
 
 mech = Browser()
@@ -46,7 +47,7 @@ def send_message(channel_id, message):
 def get_team(team_file):
     """ Get list of players on our team """
     players = []
-    with open(team_file, 'r') as team:
+    with open(team_file) as team:
         for player in team:
             players.append(player.rstrip())
     return players
