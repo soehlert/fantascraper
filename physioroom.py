@@ -49,6 +49,7 @@ def get_team(team_file):
     players = []
     with open(team_file) as team:
         for player in team:
+            player = player.replace('\\','')
             players.append(player.rstrip())
     return players
 
@@ -60,7 +61,7 @@ def get_epl_injured():
             if guy in teams:
                 break
             else:
-                epl_injured.append(guy.lower())
+                epl_injured.append(str(guy.lower()))
     return epl_injured
 
 def check_players(players, epl_injured):

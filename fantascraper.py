@@ -52,18 +52,18 @@ def find_players(soup, roster_table):
                 if ',' not in name.string:
                     if ' ' not in name.string:
                         player = name.string,
-                        players.append(player)
+                        players.append(str(player))
                     else:
                         first, last = name.string.split(' ')
-                        rename_player(first, last)
+                        rename_player(str(first), str(last))
                 else:
                     last, first = name.string.split(', ')
-                    rename_player(first, last)
+                    rename_player(str(first), str(last))
     return players
 
 def write_players(players, team_file):
     with open(team_file, 'wb') as team:
-        f = csv.writer(team,delimiter=' ')
+        f = csv.writer(team,delimiter=' ',quoting = csv.QUOTE_NONE,escapechar='\\')
         for player in players:
             f.writerow(player)
 
