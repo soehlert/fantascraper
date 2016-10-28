@@ -75,3 +75,4 @@ That should get you able to run the script once through no problem. If you'd lik
 6. Switch to using http://www.rotoworld.com/teams/injuries/bpl/all/
 7. Should probably just be one big script
 8. Use full name checks to avoid two guys with the same last name and initial or maybe use team name as part of a tuple with player name
+9. Move to python3
