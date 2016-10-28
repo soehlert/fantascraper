@@ -11,15 +11,15 @@ physioroom.py works, probably needs more testing.
 2. pip
 3. virtualenv (optional, but suggested)
 
-Use pip to install required pip packages
-```
-$ pip install -r requirements.txt
-```
-
 ### Configuration
 
 ```
 $ git clone https://github.com/soehlert/fantascraper.git
+```
+
+Use pip to install required pip packages
+```
+$ pip install -r requirements.txt
 ```
 
 Edit fantascraper.conf by entering the proper things.
