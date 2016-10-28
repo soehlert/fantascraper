@@ -26,14 +26,7 @@ Edit fantascraper.conf by entering the proper things.
 
 To find your league id and team id go to your roster page in fantrax. In the url bar you'll see `teamID=xxxxx&` where the xxxxxx (NOT INCLUDING THE &) is a random string that is your team id. The league id will look like `leagueID=xxxxxxx&` and same thing there.
 
-Replace team.csv with a file full of your players (One player per line, first initial and last name):
-
-```
-H Kane
-E Dier
-```
-
-Or even better, now run fantascraper.py and let it create the team.csv file for you.
+Run fantascraper.py and let it create the team.csv file for you.
 
 Edit the physioroom.conf file by entering a channel id and a token.
 
@@ -72,7 +65,7 @@ That should get you able to run the script once through no problem. If you'd lik
 3. Automate filling out team list √
 4. Add script to check starting lineups via twitter
 5. Turn into an app so we can use oauth instead of test tokens
-6. Switch to using http://www.rotoworld.com/teams/injuries/bpl/all/
+6. Switch to using http://www.rotoworld.com/teams/injuries/bpl/all/ or even better: premierinjuries.com (grab status from there too?)
 7. Should probably just be one big script
 8. Use full name checks to avoid two guys with the same last name and initial or maybe use team name as part of a tuple with player name
 9. Move to python3
