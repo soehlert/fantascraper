@@ -80,3 +80,5 @@ if __name__ == '__main__':
         send_message(slack_channel, "The following players are injured:")
         for player in injured:
             send_message(slack_channel, player)
+    else:
+        send_message(slack_channel, "Nobody is listed as injured")
