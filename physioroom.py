@@ -61,7 +61,7 @@ def get_epl_injured():
             if guy in teams:
                 break
             else:
-                epl_injured.append(str(guy.lower()))
+                epl_injured.append(str(guy.rstrip().lower()))
     return epl_injured
 
 def check_players(players, epl_injured):
