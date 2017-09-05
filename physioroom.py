@@ -81,7 +81,7 @@ if __name__ == '__main__':
     epl = get_epl_injured()
     injured = check_players(team, epl)
     if injured:
-        send_message(slack_channel, "The following players are injured:")
+        send_message(slack_channel, "The following players on you team are injured:")
         for player in injured:
             send_message(slack_channel, player)
     else:
