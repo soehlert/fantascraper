@@ -26,7 +26,6 @@ slack_channel = conf.get('slack', 'channel_id')
 slack_token = conf.get('slack', 'token')
 
 slack_client = SlackClient(slack_token)
-#teams = ["Arsenal", "Liverpool", "Manchester City", "West Bromwich Albion", "Tottenham Hotspur", "Newcastle United", "Burnley", "Swansea City", "Manchester United", "Crystal Palace", "Chelsea", "Bournemouth", "Leicester City", "Everton", "Southampton", "Stoke City", "Watford", "Huddersfield Town", "West Ham United", "Brighton and Hove Albion"]
 
 mech = Browser()
 url = 'http://premierinjuries.com/injury-table.php'
@@ -67,27 +66,23 @@ def get_epl_injured():
                 break
             else:
                 epl_injured.append(str(''.join(text for text in player.findAll(text=True) if text.parent.name != 'div').rstrip().lower()))
-    print epl_injured
     return epl_injured
 
 def check_players(players, epl_injured):
     """ Check if anyone on our team is injured """
     injured = []
     for player in players:
-        print player
         if player.lower() in epl_injured:
-            print player
             injured.append(player)
-    print injured
     return injured
 
 if __name__ == '__main__':
     team = get_team(team_file)
     epl = get_epl_injured()
     injured = check_players(team, epl)
-#    if injured:
-#        send_message(slack_channel, "The following players are injured:")
-#        for player in injured:
-#            send_message(slack_channel, player)
-#    else:
-#        send_message(slack_channel, "Nobody is listed as injured")
+    if injured:
+        send_message(slack_channel, "The following players are injured:")
+        for player in injured:
+            send_message(slack_channel, player)
+    else:
+        send_message(slack_channel, "Nobody is listed as injured")
