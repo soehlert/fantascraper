@@ -58,14 +58,15 @@ optional arguments:
 
 That should get you able to run the script once through no problem. If you'd like to set it to run on a schedule (once a day? once a week before the games start?), you'll need to use cron or something similar. (No promises any of this works on Windows).
 
-###TODO
+### TODO
 
-1. Allow bulk import (ie whole team at once) √
-2. OOP √ish
-3. Automate filling out team list √
+1. ~~Allow bulk import (ie whole team at once)~~ √
+2. ~~OOP~~√ish
+3. ~~Automate filling out team list~~ √
 4. Add script to check starting lineups via twitter
 5. Turn into an app so we can use oauth instead of test tokens
-6. Switch to using http://www.rotoworld.com/teams/injuries/bpl/all/ or even better: premierinjuries.com (grab status from there too?) √
-7. Should probably just be one big script
-8. Use full name checks to avoid two guys with the same last name and initial or maybe use team name as part of a tuple with player name √
-9. Move to python3
+6. ~~Switch to using premierinjuries.com~~ (grab status from there too?) √
+7. Grab status from premierinjuries.com
+8. Should probably just be one big script
+9. ~~Use full name checks to avoid two guys with the same last name and initial or maybe use team name as part of a tuple with player name~~ √
+10. Move to python3
