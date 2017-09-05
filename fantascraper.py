@@ -37,7 +37,7 @@ soup = BeautifulSoup(html)
 players = []
 
 def rename_player(first, last):
-    player = first[:1], last
+    player = first, last
     players.append(player)
     return players
 
