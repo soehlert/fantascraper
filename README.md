@@ -66,7 +66,7 @@ That should get you able to run the script once through no problem. If you'd lik
 4. Add script to check starting lineups via twitter
 5. Turn into an app so we can use oauth instead of test tokens
 6. ~~Switch to using premierinjuries.com~~ (grab status from there too?) √
-7. Grab status from premierinjuries.com
+7. ~~Grab status from premierinjuries.com~~
 8. Should probably just be one big script
 9. ~~Use full name checks to avoid two guys with the same last name and initial or maybe use team name as part of a tuple with player name~~ √
 10. Move to python3
