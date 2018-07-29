@@ -31,8 +31,8 @@ team_id = conf.get('config', 'team_id')
 roster_table_outfield = 'rosterTable_5010'
 roster_table_keepers = 'rosterTable_5020'
 mech = Browser()
-url = 'http://www.fantrax.com/newui/fantasy/teamRoster.go?teamId={}&leagueId={}&isSubmit=y'.format(team_id, league_id)
-page = mech.open(url)
+team_url = 'http://www.fantrax.com/newui/fantasy/teamRoster.go?teamId={}&leagueId={}&isSubmit=y'.format(team_id, league_id)
+page = mech.open(team_url)
 html = page.read()
 soup = BeautifulSoup(html)
 
@@ -67,10 +67,10 @@ def find_players(soup, roster_table):
 
 def write_players(players, team_file):
     with open(team_file, 'wb') as team:
-        f = csv.writer(team, delimiter=' ',
-                       quoting=csv.QUOTE_NONE, escapechar='\\')
+        csv_f = csv.writer(team, delimiter=' ',
+                           quoting=csv.QUOTE_NONE, escapechar='\\')
         for player in players:
-            f.writerow(player)
+            csv_f.writerow(player)
 
 
 if __name__ == '__main__':
