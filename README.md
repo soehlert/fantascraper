@@ -1,3 +1,5 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/18cc6dc97f2c4328bc61b275b44baa17)](https://www.codacy.com/app/soehlert/fantascraper?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=soehlert/fantascraper&amp;utm_campaign=Badge_Grade)
+
 # Fantascraper
 General scripts for fantasy EPL
 
