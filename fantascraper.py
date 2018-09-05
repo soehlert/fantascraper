@@ -13,6 +13,7 @@ reload(sys)
 sys.setdefaultencoding("utf-8")
 
 parser = argparse.ArgumentParser()
+<<<<<<< HEAD
 parser.add_argument(
     "-c",
     "--config",
@@ -30,6 +31,14 @@ parser.add_argument(
 parser.add_argument(
     "--version", help="Print version", action="version", version="%(prog)s 0.1.0-alpha"
 )
+=======
+parser.add_argument("-c", "--config", help="Specify config file location",
+                    default="fantascraper.conf", dest='conf_file')
+parser.add_argument("-t", "--team", help="Specify team file location",
+                    default="team.csv", dest='team_file')
+parser.add_argument("--version", help="Print version", action="version",
+                    version="%(prog)s 0.1.0-alpha")
+>>>>>>> 0db885ea8f7eca90ca61ab232b0b767d7d489d03
 args, remaining_argv = parser.parse_known_args()
 
 team_file = args.team_file
@@ -42,10 +51,15 @@ team_id = conf.get("config", "team_id")
 roster_table_outfield = "rosterTable_5010"
 roster_table_keepers = "rosterTable_5020"
 mech = Browser()
+<<<<<<< HEAD
 url = "http://www.fantrax.com/newui/fantasy/teamRoster.go?teamId={}&leagueId={}&isSubmit=y".format(
     team_id, league_id
 )
 page = mech.open(url)
+=======
+team_url = 'http://www.fantrax.com/newui/fantasy/teamRoster.go?teamId={}&leagueId={}&isSubmit=y'.format(team_id, league_id)
+page = mech.open(team_url)
+>>>>>>> 0db885ea8f7eca90ca61ab232b0b767d7d489d03
 html = page.read()
 soup = BeautifulSoup(html)
 
@@ -59,9 +73,15 @@ def rename_player(first, last):
 
 
 def find_players(soup, roster_table):
+<<<<<<< HEAD
     player_table = soup.find("table", {"id": roster_table})
     for row in player_table.findAll("tr"):
         names = row.findAll("a", {"class": "hand "})
+=======
+    player_table = soup.find('table', {'id': roster_table})
+    for row in player_table.findAll('tr'):
+        names = row.findAll('a', {'class': 'hand '})
+>>>>>>> 0db885ea8f7eca90ca61ab232b0b767d7d489d03
         for name in names:
             if name.find("img"):
                 continue
@@ -79,10 +99,17 @@ def find_players(soup, roster_table):
 
 
 def write_players(players, team_file):
+<<<<<<< HEAD
     with open(team_file, "wb") as team:
         f = csv.writer(team, delimiter=" ", quoting=csv.QUOTE_NONE, escapechar="\\")
+=======
+    with open(team_file, 'wb') as team:
+        csv_f = csv.writer(team, delimiter=' ',
+                           quoting=csv.QUOTE_NONE, escapechar='\\')
+>>>>>>> 0db885ea8f7eca90ca61ab232b0b767d7d489d03
         for player in players:
-            f.writerow(player)
+            csv_f.writerow(player)
+
 
 
 if __name__ == "__main__":
