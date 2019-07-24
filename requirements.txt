@@ -1,4 +1,4 @@
-beautifulsoup4==4.7.1
+beautifulsoup4==4.8.0
 configparser==3.7.4
 mechanize==0.4.1
 requests==2.22.0
