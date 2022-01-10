@@ -1,6 +1,6 @@
 
 beautifulsoup4==4.9.3
-configparser==5.0.2
+configparser==5.2.0
 requests==2.27.1
 mechanize==0.4.7
 slackclient==2.9.3
