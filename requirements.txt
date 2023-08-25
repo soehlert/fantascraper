@@ -5,4 +5,4 @@ requests==2.31.0
 mechanize==0.4.8
 slackclient==2.9.4
 six==1.16.0
-websocket-client==1.6.1
+websocket-client==1.6.2
